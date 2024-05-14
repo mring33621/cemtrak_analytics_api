@@ -1,7 +1,7 @@
 from io import StringIO
 
-import requests
 import pandas as pd
+import requests
 
 # Data URLs
 # TODO: make these URLs configurable
@@ -21,25 +21,32 @@ def fetch_data_into_dataframe(url: str) -> pd.DataFrame:
 
 
 def fetch_and_merge_all_datasets() -> pd.DataFrame:
-    """Fetches and combines the three datasets into a single DataFrame."""
+    """Fetches and combines the three datasets into a single DataFrame,
+    adding the 'measurement_amt' based on emitter state.
+    """
 
     organizations_df = fetch_data_into_dataframe(organizations_url)
     emitters_df = fetch_data_into_dataframe(emitters_url)
     events_df = fetch_data_into_dataframe(events_url)
 
-    # Merge emitters with organizations on organization name
     merged_df = pd.merge(emitters_df, organizations_df, left_on='organization', right_on='name', how='left')
-
-    # Merge the result with events on external_id
     merged_df = pd.merge(merged_df, events_df, left_on='external_id', right_on='external_id', how='left')
 
-    # Select only the required columns
-    merged_df = merged_df[['name_y', 'name_x', 'state', 'timestamp']]
+    # Create the 'measurement_amt' column based on state
+    def get_measurement_amt(row):
+        state = row['state']
+        meas_amt_key = f'{state}_measurement_amt'
+        meas_amt = row[meas_amt_key]
+        is_compensator = row['is_compensator']
+        if is_compensator:
+            meas_amt = -1 * meas_amt
+        return meas_amt
 
-    # Rename the columns for clarity
+    merged_df['measurement_amt'] = merged_df.apply(get_measurement_amt, axis=1)
+
+    merged_df = merged_df[['name_y', 'name_x', 'state', 'measurement_amt', 'measurement_unit', 'timestamp']]
     merged_df = merged_df.rename(columns={'name_y': 'organization_name', 'name_x': 'emitter_name'})
 
-    # Convert timestamp to datetime and sort
     merged_df['timestamp'] = pd.to_datetime(merged_df['timestamp'])
     merged_df = merged_df.sort_values(by='timestamp')
 
@@ -75,5 +82,5 @@ def show_me_the_combined_dataset():
 
 
 if __name__ == "__main__":
-  show_me_the_datasets()
-  show_me_the_combined_dataset()
+    show_me_the_datasets()
+    show_me_the_combined_dataset()
