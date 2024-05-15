@@ -2,6 +2,7 @@ from io import StringIO
 
 import pandas as pd
 import requests
+from cachetools import cached, TTLCache
 
 # Data URLs
 # TODO: make these URLs configurable
@@ -20,6 +21,7 @@ def fetch_data_into_dataframe(url: str) -> pd.DataFrame:
     return df
 
 
+@cached(cache=TTLCache(maxsize=1, ttl=300))  # Cache for 5 minutes (300 seconds)
 def fetch_and_merge_all_datasets() -> pd.DataFrame:
     """Fetches and combines the three datasets into a single DataFrame,
     adding the 'measurement_amt' based on emitter state.
@@ -49,6 +51,9 @@ def fetch_and_merge_all_datasets() -> pd.DataFrame:
 
     merged_df['timestamp'] = pd.to_datetime(merged_df['timestamp'])
     merged_df = merged_df.sort_values(by='timestamp')
+
+    # Convert Timestamps to strings before converting to JSON
+    merged_df['timestamp'] = merged_df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S.%f').str[:23]
 
     return merged_df
 

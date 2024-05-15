@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a4a2c1b-73fd-4e8c-b1f4-55554a466735" name="Changes" comment="initial commit">
+    <list default="true" id="3a4a2c1b-73fd-4e8c-b1f4-55554a466735" name="Changes" comment="Added measurement_amt, measurement_unit to datadump JSON">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fetch_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/fetch_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +135,7 @@
       <workItem from="1715692138917" duration="1064000" />
       <workItem from="1715695054411" duration="58000" />
       <workItem from="1715695130576" duration="21000" />
-      <workItem from="1715695162451" duration="5600000" />
+      <workItem from="1715695162451" duration="7590000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -145,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715699012309</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added measurement_amt, measurement_unit to datadump JSON">
+      <option name="closed" value="true" />
+      <created>1715727628370</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715727628370</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,7 +161,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="Added measurement_amt, measurement_unit to datadump JSON" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added measurement_amt, measurement_unit to datadump JSON" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/cemtrak_analytics_api$fetch_data.coverage" NAME="fetch_data Coverage Results" MODIFIED="1715697560943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
